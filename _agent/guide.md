@@ -38,6 +38,9 @@ Run [`skills/check-hn.md`](skills/check-hn.md). The brief has three parts, in or
 2. **Watching** — each watchlist entry that moved since its recorded numbers, and by how much.
 3. **The bill** — what was skipped, as counts by rule: "skipped 24: 9 price talk, 7 flamewar,
    8 outside your interests." One line. This is what makes the filter inspectable.
+4. **Cut for space, not taste** — care-about stories that lost out on points to the top five, as
+   a one-line list with their numbers. Capacity cuts and taste cuts are different verdicts, and
+   the owner should be able to tell them apart. (Earned in the first live brief, 2026-08-26.)
 
 Then offer to log reactions — [`skills/log-the-read.md`](skills/log-the-read.md).
 
