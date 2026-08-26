@@ -1,0 +1,6 @@
+# Local-only, never synced, never shipped. A published space forks its whole
+# tree including `_agent/`, so anything that must not travel lives in a
+# `*.local.md` — our project status in `_agent/now.local.md` among it.
+*.local.md
+
+.DS_Store
