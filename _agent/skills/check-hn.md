@@ -22,17 +22,24 @@ entries means first run: skip the "new since" fetch and brief the front page onl
 
 ## 2. Fetch
 
+The raw Algolia response carries `_highlightResult`, full comment-id arrays, and raw HTML
+`story_text` on every hit — none of it is used. Pipe through `jq` to keep only what the brief
+needs; it cuts a ~30-story front page from ~40KB to ~6KB and skips the persisted-output-file
+detour for a large tool result.
+
 **Front page, as ranked right now:**
 
 ```
-curl -s "https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=30"
+curl -s "https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=30" \
+  | jq -c '.hits[] | {id: .objectID, title, url, points, comments: .num_comments, t: .created_at_i}'
 ```
 
 **New since the cursor** (epoch seconds). Comparison operators must be URL-encoded — a literal
 `>` in `numericFilters` returns an error, `%3E` works:
 
 ```
-curl -s "https://hn.algolia.com/api/v1/search_by_date?tags=story&numericFilters=created_at_i%3E<CURSOR>,points%3E50&hitsPerPage=50"
+curl -s "https://hn.algolia.com/api/v1/search_by_date?tags=story&numericFilters=created_at_i%3E<CURSOR>,points%3E50&hitsPerPage=50" \
+  | jq -c '.hits[] | {id: .objectID, title, url, points, comments: .num_comments, t: .created_at_i}'
 ```
 
 For Show HN specifically, use `tags=show_hn` and drop the points filter — Show HN posts the owner
@@ -41,11 +48,15 @@ cares about are worth seeing before they have points.
 **Each watchlist entry:**
 
 ```
-curl -s "https://hn.algolia.com/api/v1/items/<ID>"
+curl -s "https://hn.algolia.com/api/v1/items/<ID>" \
+  | jq -c '{id, title, url, points, top_level_replies: (.children | length)}'
 ```
 
-Useful fields: `title`, `url`, `points`, `num_comments`, `objectID`, `created_at`. The thread link
-for a story is `https://news.ycombinator.com/item?id=<objectID>`.
+Note: this endpoint's `children` is only top-level replies, not the full thread — it won't match
+the `num_comments` figure from the search endpoints (e.g. 29 vs 98 on the same thread). Track
+points for watchlist movement; treat `top_level_replies` as a rough signal, not the same number.
+
+The thread link for a story is `https://news.ycombinator.com/item?id=<objectID (or id)>`.
 
 ## 3. Filter
 
