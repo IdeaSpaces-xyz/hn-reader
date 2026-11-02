@@ -2,9 +2,10 @@
 name: Check HN
 description: >
   The brief, end to end — find the cursor in the reading log, fetch the front page and
-  everything new since, refresh the watchlist, filter by the taste profile in guide.md, and
-  present three parts: worth your time, watching, the bill. Every number from this session's
-  API responses. Use whenever the owner asks what's on HN.
+  everything new since, refresh the watchlist, filter by the taste profile in the Agreement, and
+  present four parts: worth your time, watching, the bill, cut for space. Every number from this
+  session's API responses. Use whenever the owner asks what's on HN, or when a scheduled run
+  calls for a brief with no person present.
 ---
 
 # Check HN
@@ -60,20 +61,31 @@ The thread link for a story is `https://news.ycombinator.com/item?id=<objectID (
 
 ## 3. Filter
 
-Apply the taste profile in [`guide.md`](../guide.md) as written. Interrupt-worthy first. Tally
+Apply the taste profile in [the Agreement](../agreement.md) as written. Interrupt-worthy first. Tally
 every skipped story under the rule that skipped it — the tally is part of the brief, not internal
 bookkeeping.
 
 ## 4. Brief
 
-Three parts, in the format the guide defines: **worth your time** (≤5, one line of why-by-which-
-rule each, with links), **watching** (entries that moved, old numbers → new), **the bill** (skip
-counts by rule, one line).
+Four parts, in this order, interrupt-worthy stories first whatever else is happening:
+
+1. **Worth your time** — at most five stories, one line each on *why, by which rule* ("storage
+   internals, 340 points"), with the HN link. Never a bare list of titles.
+2. **Watching** — each watchlist entry that moved since its recorded numbers: old → new.
+3. **The bill** — what was skipped, as counts by rule, one line: "skipped 24: 9 price talk,
+   7 flamewar, 8 outside your interests."
+4. **Cut for space, not taste** — care-about stories that lost on points to the top five, as a
+   one-line list with their numbers.
 
 Every count and title comes from this session's responses. If a fetch failed, say which part of
-the brief is missing — never fill the gap from memory.
+the brief is missing and why — never fill the gap from memory.
 
-## 5. Offer to log
+## 5. Hand over the brief
 
-Reactions go through [`log-the-read.md`](log-the-read.md). Don't log silently; the owner's verdict
-is theirs to give.
+With the owner present, give it to them and offer to log reactions through
+[`log-the-read.md`](log-the-read.md). Don't log silently; the verdict is theirs to give.
+
+With no one present (a scheduled run), write the brief where the run said to put it, or print it as
+the run's output if none was named. Then advance the cursor (step 4 of
+[`log-the-read.md`](log-the-read.md)) so the next run doesn't repeat this one. Never invent
+verdicts, edit the taste profile, or drop a watch.

@@ -42,7 +42,7 @@ Then ask: **"What's on HN worth my time?"**
 ## Make it yours
 
 The starter taste profile is deliberately opinionated so you can see the filter working — and
-deliberately not yours. Open [`_agent/guide.md`](_agent/guide.md), rewrite the three lists (care
+deliberately not yours. Open [`_agent/agreement.md`](_agent/agreement.md), rewrite the three lists (care
 about, skip, interrupt-worthy), and the same model becomes a different reader. That edit is the
 whole point of forking.
 

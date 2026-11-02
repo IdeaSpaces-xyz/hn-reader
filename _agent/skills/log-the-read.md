@@ -44,9 +44,16 @@ By explicit path, so nothing else in the tree rides along:
 git add reading-log.md watchlist.md && git commit -m "Log the read — <date>" -- reading-log.md watchlist.md
 ```
 
-## 4. Propose tuning when the evidence says so
+## 4. Unattended runs: advance the cursor only
+
+When a run had no person to react, record no verdicts and no watches. Append one dated heading to
+[`reading-log.md`](../../reading-log.md) with the single line `briefed, no verdicts yet`, so the
+next brief's cursor moves past what was already shown. Commit it by path as in step 3.
+
+## 5. Propose tuning when the evidence says so
 
 Before finishing, check the pattern: three or more verdicts that contradict the taste profile —
 skips on a claimed interest, reads the profile would have hidden — is worth raising. Cite the
-entries, propose the specific edit to [`guide.md`](../guide.md), and apply it only on an explicit
-yes, committed separately so the taste change has its own date.
+entries and propose the specific edit to the taste profile in [the Agreement](../agreement.md).
+Apply it only on an explicit yes, committed separately so the taste change has its own date. An
+unattended run only reports the pattern in its output; it never edits the profile.
